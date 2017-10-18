@@ -1,0 +1,86 @@
+main
+  section.relative class=(@hero ? 'cover bg-bottom ds-wide' : 'bg-ocean pb6') style="background-image:url(#{@hero&.full_url('wide', max_width: 1600)})"
+    .absolute.top-0.right-0.left-0
+      .flex.w-100.pa4.items-baseline.flex-wrap.justify-between.montserrat
+        .brand
+          .f3
+            a.link.fw3.hover-white-80.white href="/" open
+            span.fw6.ph2.white &times;
+            a.link.f3.hover-white-80.white href=profile_path(@user.username) = @user.full_name.presence || @user.email
+
+        .links.flex.justify-between.ml6-m.ml6-l.mt3.mt0-l
+          - if user_signed_in?
+            = link_to 'dashboard', dashboard_path, class: 'f5 fw4 link ml3-ns ph3 white-90 hover-white'
+          - else
+            = link_to 'sign in', user_session_path, class: 'f5 fw4 link ml3-ns ph3 white-90 hover-white'
+
+      .ph4 = render 'shared/flash_messages'
+
+
+  - if @hero
+    section.bg-ocean.ph4.pv5
+      .center.mw85.white
+        .flex.justify-between
+          div
+            h1.cardo.f2.ma0 = @hero.title
+            .f5.fw3.montserrat.mb4.mt2 Limited Edition
+            h2.cardo.f2.ma0 = @user.full_name
+            .f5.fw3.montserrat.mv2 = @user.country
+          div
+            .fw5.f5.montserrat.mt3
+              ' Prints from
+              = number_to_currency @hero.start_price, precision: 0
+
+  section.bg-white.montserrat.ph4.pv5
+    .center.flex.mw85
+      .flex-2.mr4
+        h3.evening.fw4.ma0.ttu Bio
+        h1.cardo.f1.fw4.mb3.mt4.ocean = @user.full_name
+
+        = simple_format @user.bio, class: 'f3 fw3 lh-copy montserrat'
+
+      .flex-1.ml4.montserrat
+        .mb4
+          - if @user.country.present? || @user.education.present? || @user.born.present?
+            .evening.f5.fw5.mb3.nowrap.o-50.tracked-mega.ttu Artist Information
+            table.collapse.w-100
+              tbody
+                - if @user.country.present?
+                  tr
+                    td.b--black-10.bb.f5.foam.pv3.v-btm Location
+                    td.b--black-10.bb.f4.mw4.night.pv3 = @user.country
+                - if @user.education.present?
+                  tr
+                    td.b--black-10.bb.f5.foam.pv3.v-btm Education
+                    td.b--black-10.bb.f4.mw4.night.pv3 = @user.education
+                - if @user.born.present?
+                  tr
+                    td.b--black-10.bb.f5.foam.pv3.v-btm Born
+                    td.b--black-10.bb.f4.mw4.night.pv3 = @user.born
+
+        .evening.f5.fw5.mb3.nowrap.o-50.tracked-mega.ttu Share This Artist
+        .fb-share-button data-href=request.url data-layout="button_count"
+
+  section.bg-foil.montserrat.ph4.pv5
+    .center.mw85
+      h1.cardo.f1.night.tc From the artist
+      .mv3 data-sections=['All', 'For sale', 'Recently sold'].to_json data-photos-url=photos_profile_path(@user)
+        /.mv3.tc
+        /  a.evening.f4.fw5.link.mh4 href="" All
+        /  a.f4.fw5.link.mh4.tint href="" For sale
+        /  a.f4.fw5.link.mh4.tint href="" Recently sold
+        /
+        /.mv3.tr
+        /  svg.ml3.mode-switch width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"
+        /    g fill="none" fill-rule="evenodd"
+        /      circle cx="28" cy="28" r="28"
+        /      path d="M12 16h10v7H12v-7zm22 0h10v7H34v-7zM23 33h10v7H23v-7zm-11-9h10v16H12V24zm22 0h10v16H34V24zm-11-8h10v16H23V16z" fill="#FFF"
+        /  svg.ml3.mode-switch width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"
+        /    g fill="none" fill-rule="evenodd"
+        /      circle cx="28" cy="28" r="28"
+        /      rect x="16" y="16" width="24" height="24" rx="2"
+        /  svg.ml3.mode-switch width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"
+        /    g fill="none" fill-rule="evenodd"
+        /      circle cx="28" cy="28" r="28"
+        /      text font-family="FontAwesome" font-size="28" letter-spacing=".311"
+        /        tspan x="16.344" y="38" 

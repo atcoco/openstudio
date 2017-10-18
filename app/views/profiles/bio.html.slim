@@ -1,0 +1,10 @@
+= form_with model: @user, html: { class: 'pv4' }, method: :put, url: bio_profile_path(@user) do |f|
+  = f.text_area :bio,
+    class: 'bg-white bn mb3 montserrat ocean outline-0 pa3 p-tint w-100',
+    placeholder: 'Artist bio',
+    rows: 10
+  - if @user.errors[:bio].present?
+    .red.mt2 = @user.errors.full_messages_for(:bio).join(', ')
+  .flex.items-center.justify-end.mt3
+    a.evening.link.mr4 href="javascript:;" data-remove="#edit-bio-form" Cancel
+    = f.submit 'Save', class: 'ba bg-transparent bw1 b--ocean dib hover-oceans link ocean pointer pv3 ph6'

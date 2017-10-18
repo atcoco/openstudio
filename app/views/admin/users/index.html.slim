@@ -1,0 +1,36 @@
+.pa4
+  table.collapse.w-100
+    thead
+      tr
+        th.pb3.tl Name
+        th.pb3.tl Role
+        th.pb3.tl Email
+        th.pb3.tl Edication
+        th.pb3.tl Born
+        th.pb3.tl Created
+        th
+        th
+    tbody
+      - @users.each do |user|
+        tr
+          td.pb3 = link_to (user.full_name.presence || user.id), admin_user_path(user), class: 'link ocean underline-hover'
+          td.pb3 = user.role
+          td.pb3
+            => user.email
+            - unless user.confirmed?
+              span.red
+                | (not confirmed)
+          td.pb3 = user.education.presence || '-'
+          td.pb3 = user.born.presence || '-'
+          td.pb3 = l user.created_at, format: :long
+          td.pb3
+            a.db.link.pa2.tc.white[
+              class=(user.published? ? 'bg-green' : 'bg-gold')
+              href=(user.published? ? unpublish_admin_user_path(user) : publish_admin_user_path(user))
+            ] = user.published? ? 'Unpublish' : 'Publish'
+          td.pl3.pb3
+            - unless current_user == user
+              = link_to 'Sign in', impersonate_admin_user_path(user), class: 'link ocean'
+
+  .mt3
+    = paginate @users

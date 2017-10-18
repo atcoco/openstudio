@@ -1,0 +1,10 @@
+doctype html
+html
+  = render 'layouts/html_head'
+
+  body
+    = render 'shared/fb_sdk'
+    = yield
+
+    = render 'shared/google_analytics'
+    = javascript_pack_tag 'application', async: true

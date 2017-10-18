@@ -1,0 +1,6 @@
+.flash-messages.mw8-ns.center
+  - flash.each do |type, message|
+    - if message.present?
+      .alert.ph4.pv3.relative.tc class=flash_container_class_for(type)
+        span.absolute.js-close.f4.pointer.right-1.top-1 data-dismiss=".alert" &times;
+        = message

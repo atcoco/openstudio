@@ -1,0 +1,3 @@
+b: ./bin/rails s
+f: ./bin/webpack-dev-server
+g: ./bin/guard -i

@@ -1,0 +1,26 @@
+doctype html
+html
+  = render 'layouts/html_head'
+
+  body
+    .bg-ocean.flex.w-100.pa4.items-baseline.flex-wrap.justify-between.montserrat
+      .brand
+        a.link.f3.pv3.white-90.hover-white href=root_path
+          span.fw3 open
+          span.fw6 studios
+        a.link.f3.pv3.white-90.hover-white href=admin_root_path
+          span.fw5.ml2.ttu admin
+
+      .links.flex.justify-between.mt3.mt0-l
+        = link_to 'photos', admin_photos_path(show: 'unapproved'), class: 'f5 fw4 link ph3 white-90 hover-white'
+        = link_to 'users', admin_users_path, class: 'f5 fw4 link ph3 white-90 hover-white'
+        = link_to 'logout', logout_path, class: 'f5 fw4 link ml3-ns ph3 white-90 hover-white'
+
+    - if current_user != true_user
+      .ma4
+        | You're signed as "
+        = current_user.full_name
+        ' ".
+        = link_to 'Click here to sign out', stop_impersonating_admin_users_path, class: 'link ocean'
+
+    = yield

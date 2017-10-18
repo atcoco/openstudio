@@ -1,0 +1,35 @@
+.bg-light-gray.cover.min-vh-100.ph4.pv3 style="background-image: url(http://farid.co/OS/onboard-bg.jpg)"
+  .brand
+    a.link.f3.pa3.white-90.hover-white href="/"
+      span.fw3 open
+      span.fw6 studios
+
+  .center.mw7-ns.mb4.mt6
+    = render 'shared/flash_messages'
+
+    h1.cardo.f2.fw3.mb5.tc.white Welcome back!
+
+    a.ba.b--white.bg-transparent.center.db.f4.fw4.hover-ocean.hover-bg-white.link.montserrat.pa3.pointer.tc.w-80.white href=user_facebook_omniauth_authorize_path
+      i.f3.fa.fa-facebook.mr3.relative style="top: 2px"
+      | Sign in with Facebook
+
+    .cardo.f3.mv4.tc.white Or
+
+    = form_with model: resource, local: true, url: session_path(resource_name), class: 'center ma4 w-80' do |f|
+      .mb4
+        = f.email_field :email, class: "ba #{resource.errors[:email].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your email'
+        - resource.errors[:email].each do |error|
+          .mt2.lime = error
+
+      .mb4
+        = f.password_field :password, class: "ba #{resource.errors[:password].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your password'
+        - resource.errors[:password].each do |error|
+          .mt2.lime = error
+
+      .mb4.tc
+        input.ba.b--white.bg-transparent.f3.fw4.hover-ocean.hover-bg-white.link.montserrat.pa3.pointer.w-100.white type="submit" value="Sign in"
+
+      .flex.justify-between.mb3
+        a.f6.hover-white.link.white-90 href=new_user_registration_path Don't have an account?
+        a.f6.hover-white.link.white-90 href=new_user_password_path Forgot your password?
+      a.db.f6.hover-white.link.tr.w-100.white-90 href=new_user_confirmation_path Didn't receive confirmation instructions?

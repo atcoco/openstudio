@@ -1,0 +1,23 @@
+.bg-light-gray.cover.min-vh-100.ph4.pv3 style="background-image: url(http://farid.co/OS/onboard-bg.jpg)"
+  .brand
+    a.link.f3.pa3.white-90.hover-white href="/"
+      span.fw3 open
+      span.fw6 studios
+
+  .center.mw7-ns.mb4.mt6
+    = render 'shared/flash_messages'
+
+    h1.cardo.f2.fw3.mb5.tc.white Resend confirmation instructions
+
+    = form_with model: resource, url: confirmation_path(resource_name), html: { method: :post } do |f|
+      .mb4
+        = f.email_field :email, class: "ba #{resource.errors[:email].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your email'
+        - resource.errors[:email].each do |error|
+          .mt2.lime = error
+
+      .mb4.tc
+        input.ba.b--white.bg-transparent.f3.fw4.hover-ocean.hover-bg-white.link.montserrat.pa3.pointer.w-100.white type="submit" value="Resend confirmation instructions"
+
+      .flex.justify-between.mb3
+        a.f6.hover-white.link.white-90 href=new_user_session_path Already have account?
+        a.f6.hover-white.link.white-90 href=new_user_password_path Forgot your password?

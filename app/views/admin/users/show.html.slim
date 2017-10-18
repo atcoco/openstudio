@@ -1,0 +1,23 @@
+.pa4
+  h2
+    => @user.full_name
+    small = link_to 'photos', admin_photos_path(user: @user), class: 'link ocean underline-hover'
+  .flex
+    .flex-1
+      .mb2
+        ' Role:
+        = @user.role
+      .mb2
+        ' Created:
+        = l @user.created_at, format: :long
+      .mb2
+        ' Updated:
+        = l @user.updated_at, format: :long
+
+    .flex-1
+      .mb2
+        ' Education:
+        = @user.education.presence || '-'
+      .mb2
+        ' Born:
+        = @user.born.presence || '-'

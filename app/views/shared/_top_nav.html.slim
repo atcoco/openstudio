@@ -1,0 +1,33 @@
+.flex.w-100.pa4.items-baseline.flex-wrap.justify-between.montserrat
+  .brand
+    a.link.f3.pa3.white-90.hover-white href="/"
+      span.fw3 open
+      span.fw6 studios
+
+  .links.flex.justify-between.ml6-m.ml6-l.mt3.mt0-l
+    = link_to 'artists', root_path, class: 'f5 fw4 link ph3 white-90 hover-white'
+    = link_to 'buyers', root_path, class: 'f5 fw4 link ph3 white-90 hover-white'
+    - if user_signed_in?
+      = link_to 'profile', profile_path(current_user.username), class: 'f5 fw4 link ml3-ns ph3 white-90 hover-white'
+    - else
+      = link_to 'login', user_session_path, class: 'f5 fw4 link ml3-ns ph3 white-90 hover-white'
+
+/- inverted = defined?(inverted) ? inverted : false
+/
+/nav.navbar.navbar-static-top class=(inverted ? 'navbar-inverse' : 'navbar-default')
+/  .container
+/    .navbar-header
+/      button.navbar-toggle.collapsed data-toggle="collapse" data-target="#navbar"
+/      .navbar-text
+/        a.white-80.hover-white> href="/" openstudios
+/        ' x
+/        a.white-80.hover-white.f4 href="/" = current_user.full_name
+/    .navbar-collapse.collapse#navbar
+/      ul.nav.navbar-nav
+/        li = link_to 'artists', root_path, class: 'near-white'
+/        li = link_to 'buyers', root_path, class: 'near-white'
+/      ul.nav.navbar-nav.navbar-right
+/        - if user_signed_in?
+/          li = link_to 'Profile', profile_path(current_user.username), class: 'near-white'
+/        - else
+/          li = link_to 'login', user_session_path, class: 'near-white'

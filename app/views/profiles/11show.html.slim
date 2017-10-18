@@ -1,0 +1,76 @@
+main
+  .ph4 = render 'shared/flash_messages'
+
+  section.bg-foil.ph4
+    .center.mw85#account-settings-form
+
+  - if @user.id == current_user.id
+    .bg-browns.pa4
+      .center.mw85
+        h1.cardo.f1.fw4.white Dashboard
+
+        - if false
+          .flex.justify-between.mv5
+            .flex-2
+              .b.f5.foam.mb3.montserrat.tracked-mega.ttu Total Sales
+              .cardo.f0.white = number_to_currency(12345.67)
+            .flex-1
+              .b.f5.foam.mb3.montserrat.tracked-mega.ttu Photos Sold
+              .cardo.f0.white = 123
+
+  section.bg-foil.montserrat.ph4.pv5
+    .center.mw85
+      h1.cardo.f1.night Photos
+      - @photos.order(created: :desc).each_slice(3).each_with_index do |slice, idx|
+        .flex.justify-between.mb-2p
+          - slice.each do |photo|
+            .ba.bw3.b--white.bg-white.shadow-a.w-32.photo-wrapper
+              .cover.ds.hide-child.relative style="background-image:url(#{photo.full_url('square', max_width: 600)})"
+                .absolute.absolute--fill.bg-black-40.child.flex.justify-center.items-center
+                  a.b.f4.link.white href="javascript:;" data-remote="photo-form" data-target="#edit-photo-form-#{idx}" data-url=edit_photo_path(photo)
+                    | Edit
+                    i.fa.fa-pencil.ml2
+              .b.cardo.f4.mt2.pt1.truncate = photo.title
+              .foam.fw3.f5.mt1.truncate = photo.description
+        div id="edit-photo-form-#{idx}"
+
+  section.bg-white.montserrat.ph4.pv5
+    .center.flex.mw85
+      .flex-2.mr4
+        h3.evening.fw4.ma0.ttu Bio
+        h1.cardo.f1.fw4.mb3.mt4.ocean = @user.full_name
+
+        = simple_format @user.bio, class: 'f3 fw3 lh-copy montserrat'
+
+        - if @user == current_user
+          a.ba.bw1.b--ocean.dib.hover-oceans.link.mt4.ocean.pv3.ph6 data-remote="bio-form" data-target="#edit-bio-form" data-url=bio_profile_path(@user) href="javascript:;" Edit bio
+
+      .flex-1.ml4.montserrat
+        .mb4
+          .evening.f5.fw5.mb3.nowrap.o-50.tracked-mega.ttu Artist Information
+          table.collapse.w-100
+            tbody
+              - if @user.country.present?
+                tr
+                  td.b--black-10.bb.f5.foam.pv3.v-btm Location
+                  td.b--black-10.bb.f4.mw4.night.pv3 = @user.country
+              /tr
+              /  td.b--black-10.bb.f5.foam.pv3.v-btm Instagram
+              /  td.b--black-10.bb.f4.mw4.night.pv3.truncate @romarulezromarulezromarulezromarulez
+              /tr
+              /  td.b--black-10.bb.f5.foam.pv3.v-btm Followers
+              /  td.b--black-10.bb.f4.mw4.night.pv3 10,123
+              - if @user.education.present?
+                tr
+                  td.b--black-10.bb.f5.foam.pv3.v-btm Education
+                  td.b--black-10.bb.f4.mw4.night.pv3 = @user.education
+              - if @user.born.positive?
+                tr
+                  td.b--black-10.bb.f5.foam.pv3.v-btm Born
+                  td.b--black-10.bb.f4.mw4.night.pv3 = @user.born
+
+        .evening.f5.fw5.mb3.nowrap.o-50.tracked-mega.ttu Share This Artist
+        .fb-share-button data-href=request.url data-layout="button_count"
+
+  section.bg-foil.ph4
+    .center.mw85#edit-bio-form

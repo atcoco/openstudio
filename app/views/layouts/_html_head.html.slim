@@ -1,0 +1,15 @@
+head
+  link rel="apple-touch-icon" href=image_url('favs/apple-icon-precomposed.png')
+  link rel="icon" size="96x96" href=image_url('favs/favicon-96x96.png')
+  link rel="icon" size="32x32" href=image_url('favs/favicon-32x32.png')
+  meta charset="utf-8"
+  meta name="viewport" content="width=device-width, initial-scale=1"
+
+  = csrf_meta_tags
+
+  == yield :meta if content_for?(:meta)
+
+  title = content_for?(:title) ? yield(:title) : 'openstudios'
+
+  = stylesheet_pack_tag 'application', media: 'all'
+  link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Montserrat:300,500,400,600|Roboto" rel="stylesheet"

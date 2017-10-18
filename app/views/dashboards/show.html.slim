@@ -1,0 +1,136 @@
+nav.bg-ocean.montserrat.pa4
+  .flex.w-100.items-baseline.flex-wrap.justify-between
+    .f3
+      a.link.fw3.hover-white-90.white href="/" open
+      span.fw6.ph2.white &times;
+      a.link.f3.tint.hover-white href=profile_path(current_user.username) = current_user.full_name.presence || current_user.email
+
+    .slide-child.relative
+      a.f4.flex.items-center.justify-between.link.relative.white.hover-tint.nowrap href="javascript:;"
+        = current_user.full_name.presence || current_user.email
+        i.fa.fa-chevron-down.ml2.f7
+      .absolute.child.bg-white.br1.f5.pl5.pr3.pv3.right--1.shadow-2.top--1.tr.z-1
+        a.ocean.f4.flex.items-center.justify-end.mb4.nowrap
+          = current_user.full_name.presence || current_user.email
+          i.fa.fa-chevron-up.ml2.f7
+        = link_to 'Public Profile', profile_path(current_user), class: 'db evening hover-night link mv3 nowrap'
+
+        = link_to 'Account settings', 'javascript:;',
+          class: 'db evening hover-night link mv3 nowrap',
+          data: { remote: 'account-settings', target: '#account-settings-form', url: settings_dashboard_path }
+
+        = link_to 'Upload more work', onboarding_root_path, class: 'db evening hover-night link mv3 nowrap'
+
+        = link_to 'Update your bio', 'javascript:;',
+          class: 'db evening hover-night link mv3 nowrap',
+          data: { remote: 'bio-form', target: '#edit-bio-form', url: settings_dashboard_path }
+
+        - unless current_user.signatures.exists?
+          = link_to 'Create your Authencity Certificate', 'javascript:;',
+            class: 'db evening hover-night link mv3 nowrap',
+            data: { index: 1, remote: 'account-settings', target: '#account-settings-form', url: settings_dashboard_path }
+
+        hr.bt.b--foil.mv3.relative
+        = link_to 'Logout', logout_path, class: 'db evening hover-night link mt3 nowrap'
+
+main
+  section.bg-foil.ph4
+    .center.mw85#account-settings-form
+
+  - if @show_welcome
+    .bg-browns.f4.lh-copy.ph4.pv5.white
+      .center.montserrat.mw85
+        .cardo.f1.mb3
+          | Thanks for taking part to OpenStudios.
+          br
+          | We're thrilled to have you onboard!
+        | Before your profile can go public, there are a few steps you must take:
+        ol.f5.tint
+          li.mb2 Confirm your email. Your should have received an email with a confirmation link. Click that before moving forward.
+          li.mb2
+            ' Update you bio. Take good care of this part! it's one of the first things visitors will see from you! you can do that
+            = link_to 'here', dashboard_path(anchor: 'edit-bio-form'), class: 'link ocean hover-evening'
+            | .
+          li.mb2
+            | Upload more work. The more work you upload the more chance you'll have to sell! Here's the
+            =<> link_to 'link', onboarding_root_path, class: 'link ocean hover-evening'
+            | to do it.
+          li.mb2
+            ' Visit your public profile to make sure everything looks to your taste:
+            = link_to 'public profile', profile_path(current_user), class: 'link ocean hover-evening'
+        .f5.tint
+          ' If you have any question, don't hesitate to email us at
+          = link_to 'team@openstudios.in', 'mailto:team@openstudios.in', class: 'link ocean hover-evening'
+
+  .ph4 = render 'shared/flash_messages'
+
+  - unless @show_welcome
+    .bg-browns.pa4
+      .center.mw85
+        h1.cardo.f1.fw4.white Dashboard
+
+        - if false
+          .flex.justify-between.mv5
+            .flex-2
+              .b.f5.foam.mb3.montserrat.tracked-mega.ttu Total Sales
+              .cardo.f0.white = number_to_currency(12345.67)
+            .flex-1
+              .b.f5.foam.mb3.montserrat.tracked-mega.ttu Photos Sold
+              .cardo.f0.white = 123
+
+  section.bg-foil.montserrat.ph4.pv5
+    .center.mw85
+      h1.cardo.f1.night Photos
+      - @photos.each_slice(3).each_with_index do |slice, idx|
+        .flex.justify-between.mb-2p
+          - slice.each do |photo|
+            .ba.bw3.b--white.bg-white.shadow-a.w-32.photo-wrapper
+              .cover.ds.hide-child.relative style="background-image:url(#{photo.full_url('square', max_width: 600)})"
+                .absolute.br4.ma3.pv2.ph3.shadow-1.top-0 class=(photo.approved? ? 'bg-light-green night' : photo.preview? ? 'bg-light-yellow night' : 'bg-light-red foil') = photo.status
+                .absolute.absolute--fill.bg-black-40.child.flex.justify-center.items-center
+                  a.b.f4.link.white href="javascript:;" data-remote="photo-form" data-target="#edit-photo-form-#{idx}" data-url=edit_photo_path(photo)
+                    | Edit
+                    i.fa.fa-pencil.ml2
+              .b.cardo.f4.mt2.pt1.truncate = photo.title
+              .foam.fw3.f5.mt1.truncate = photo.description
+        div id="edit-photo-form-#{idx}"
+
+  section.bg-white.montserrat.ph4.pv5
+    .center.flex.mw85
+      .flex-2.mr4
+        h3.evening.fw4.ma0.ttu Bio
+        h1.cardo.f1.fw4.mb3.mt4.ocean = current_user.full_name
+
+        = simple_format current_user.bio, class: 'f3 fw3 lh-copy montserrat'
+
+        a.ba.bw1.b--ocean.dib.hover-oceans.link.mt4.ocean.pv3.ph6 data-remote="bio-form" data-target="#edit-bio-form" data-url=bio_dashboard_path href="javascript:;" Edit bio
+
+      .flex-1.ml4.montserrat
+        .mb4
+          .evening.f5.fw5.mb3.nowrap.o-50.tracked-mega.ttu Artist Information
+          table.collapse.w-100
+            tbody
+              - if current_user.country.present?
+                tr
+                  td.b--black-10.bb.f5.foam.pv3.v-btm Location
+                  td.b--black-10.bb.f4.mw4.night.pv3 = current_user.country
+              /tr
+              /  td.b--black-10.bb.f5.foam.pv3.v-btm Instagram
+              /  td.b--black-10.bb.f4.mw4.night.pv3.truncate @romarulezromarulezromarulezromarulez
+              /tr
+              /  td.b--black-10.bb.f5.foam.pv3.v-btm Followers
+              /  td.b--black-10.bb.f4.mw4.night.pv3 10,123
+              - if current_user.education.present?
+                tr
+                  td.b--black-10.bb.f5.foam.pv3.v-btm Education
+                  td.b--black-10.bb.f4.mw4.night.pv3 = current_user.education
+              - if current_user.born.present?
+                tr
+                  td.b--black-10.bb.f5.foam.pv3.v-btm Born
+                  td.b--black-10.bb.f4.mw4.night.pv3 = current_user.born
+
+        .evening.f5.fw5.mb3.nowrap.o-50.tracked-mega.ttu Share This Artist
+        .fb-share-button data-href=request.url data-layout="button_count"
+
+  section.bg-foil.ph4
+    .center.mw85#edit-bio-form

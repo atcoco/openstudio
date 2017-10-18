@@ -1,0 +1,29 @@
+.mode-switch {
+  cursor: pointer;
+
+  circle, path, rect, text {
+    transition: fill .15s ease-in;
+  }
+
+  circle {
+    fill: #fff;
+  }
+
+  path, rect, text {
+    fill: #00849d;
+  }
+
+  &.active {
+    pointer-events: none;
+  }
+
+  &:hover, &.active {
+    circle {
+      fill: #00849d;
+    }
+
+    path, rect, text {
+      fill: #fff;
+    }
+  }
+}

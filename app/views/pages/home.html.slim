@@ -1,0 +1,162 @@
+section.cover.bg-top style="background-image:url(http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg)"
+  = render 'shared/top_nav'
+
+  = render 'shared/flash_messages'
+
+  .container.hero.-with-background.-black.top
+    h1.cardo.f-5.fw4.tc.near-white.mb6.mt7
+      | The world's best emerging photographic artists
+
+    .tc.pb5
+      a.ba.bw1.link.b--white.f3.fw6.montserrat.hover-light-gray.ph5.pv3.white href=onboarding_root_path
+        | Get started
+
+
+section.pa6.bg-ocean
+  h6.f4.montserrat.ma0.mb4.tint.ttu
+    | Cutivating Connection
+
+  .cardo.f1.foil
+    ' openstudios fosters cultural exchange between markers and collectors.
+    | We help today's top talent sell out of limited edition prints
+    | bringing a new wave of collectable images out into the world
+
+
+section.bg-foil.pa5
+  h2.cardo.f1.fw4.mt4.night.tc Featured artist studios
+
+  .montserrat.fw6.mv5.tc
+    a.evening.underline-hover.link.mh3 href="#" All
+    a.tint.underline-hover.link.mh3 href="#" Featured
+    a.tint.underline-hover.link.mh3 href="#" New
+
+  .mb4
+    - 6.times do |x|
+      .ba.b--transparent.bw4.dib.w-third
+        .ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q style="background-image:url(#{x % 2 == 0 ? 'http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg' : 'http://farid.co/fef5ea19-24d4-49a5-a2a1-a927cb617713.jpg'})"
+          .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+            | Some name
+            a.ba.b--white.child.f5.fw4.link.montserrat.mt4.pa3.white href="#" view artwork
+
+  .mb4.montserrat.tc
+    a.evening.f3.fw6.link href="#"
+      ' More artist studios
+      | &xrarr;
+
+
+section.pa5
+  h2.cardo.f1.fw4.mt4.night.tc Guest Curators Studios
+
+  .montserrat.fw6.mv5.tc
+    a.evening.underline-hover.link.mh3 href="#" All
+    a.tint.underline-hover.link.mh3 href="#" Featured
+    a.tint.underline-hover.link.mh3 href="#" New
+
+  .mb4
+    - 6.times do |x|
+      .ba.b--transparent.bw4.dib.w-third
+        a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q href="#" style="background-image:url(#{x % 2 == 0 ? 'http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg' : 'http://farid.co/fef5ea19-24d4-49a5-a2a1-a927cb617713.jpg'})"
+          .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+            | Some name
+            .ba.b--white.child.f5.fw4.link.montserrat.mt4.pa3.white view artwork
+
+  .mb4.montserrat.tc
+    a.evening.f3.fw6.link href="#"
+      ' More Guest Curators Studios
+      | &xrarr;
+
+
+section.pa5.bg-foil
+  h2.cardo.f1.fw4.mt4.night.tc Browse artwork by price
+
+  .mb4
+    .ba.b--transparent.bw4.dib.w-two-thirds
+      a.db.ba.b--white.bw4.cover.ds-half4.relative.overflow-hidden.shadow-q href="#" style="background-image:url(http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg)"
+        .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+          .montserrat.f4.fw200.mb3 Artworks up to
+          .f2 $500
+    .ba.b--transparent.bw4.dib.w-third
+      a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q href="#" style="background-image:url(http://farid.co/fef5ea19-24d4-49a5-a2a1-a927cb617713.jpg)"
+        .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+          .montserrat.f4.fw200.mb3 Artworks
+          .f2 $500 - $1,000
+    .ba.b--transparent.bw4.dib.w-third
+      a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q href="#" style="background-image:url(http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg)"
+        .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+          .montserrat.f4.fw200.mb3 Artworks
+          .f2 $1,000 - $2,000
+    .ba.b--transparent.bw4.dib.w-third
+      a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q href="#" style="background-image:url(http://farid.co/fef5ea19-24d4-49a5-a2a1-a927cb617713.jpg)"
+        .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+          .montserrat.f4.fw200.mb3 Artworks
+          .f2 $2,000 - $5,000
+    .ba.b--transparent.bw4.dib.w-third
+      a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q href="#" style="background-image:url(http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg)"
+        .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+          .montserrat.f4.fw200.mb3 Artworks
+          .f2 $5,000 - $10,000
+
+  .mb4.montserrat.tc
+    a.evening.f3.fw6.link href="#"
+      ' View all
+      | &xrarr;
+
+
+section.pa5
+  h2.cardo.f1.fw4.mt4.night.tc More than 100 new artists
+
+  .montserrat.fw6.mv5.tc
+    a.evening.underline-hover.link.mh3 href="#" All
+    a.tint.underline-hover.link.mh3 href="#" Most popular
+    a.tint.underline-hover.link.mh3 href="#" Recently sold
+
+  .mb4
+    - 6.times do |x|
+      .ba.b--transparent.bw4.dib.w-third
+        a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q href="#" style="background-image:url(#{x % 2 == 0 ? 'http://farid.co/da3499c7-c2c0-4639-8d4b-7596a9fb7c19.jpg' : 'http://farid.co/fef5ea19-24d4-49a5-a2a1-a927cb617713.jpg'})"
+          .absolute.absolute--fill.cardo.f2.flex.flex-column.justify-center.hide-child.items-center.white
+            | Some name
+            .ba.b--white.child.f5.fw4.link.montserrat.mt4.pa3.white view artwork
+
+  .mb4.montserrat.tc
+    a.evening.f3.fw6.link href="#"
+      ' More artists
+      | &xrarr;
+
+
+section.bg-center.cover style="background-image:url(http://farid.co/OS/syria-exhibition-tpg-004-006.jpg); height: 600px"
+
+
+section.pa5
+  .montserrat.night.mb4.ttu OpenStudios
+  .cardo.f1.lh-title.measure-narrow.mb5.ocean
+    | Join the dialogue of photography with artists and collectors from all over the world with simple tools to buy and sell.
+  .f4.fw2.montserrat.night.lh-title.measure
+    | Museum quality limited edition photos printed and delivered anywhere with just the click of a button
+
+
+section.bg-foil.flex.justify-between
+  .flex-half.f3.fw2.montserrat.pa5
+    .f6.fw6.mb4.ocean.ttu Our Mission
+    p.lh-copy
+      | An industry driven solution to the growing needs of photographers, curators, galleries, collectors, and members of the photography loving public. We work alongside recognized printing labs and leading photography communities to help creators sustain a living making art.
+    p.lh-copy
+      | Explore a diverse selection of work and join the call that has changed the way our world interacts with the industry.
+  .flex-half.bg-center.cover style="background-image:url(http://farid.co/OS/our-mission.jpg)" &nbsp;
+
+section.bg-ocean.ph5.pv6.tc.white
+  .f1.mb5 David Arnold made $15,000 in 24 hrs with openstudio.
+  a.ba.bw2.dib.f3.hover-black-70.link.ph5.pv3.white href="#" read case study
+
+
+section.pa5.flex-l.sans-serif
+  .flex-auto-l.pa4
+    .f5.montserrat.mb4.ocean.ttu Buyers
+    .cardo.dark-glow.f1.mb5 Interested in purchasing new photography?
+    a.ba.b--ocean.bw1.dib.f4.fw6.link.ocean.ph5.pv3 browse photos
+  .flex-auto-l.pa4
+    .f5.montserrat.mb4.ocean.ttu Photographers
+    .cardo.dark-glow.f1.mb5 Ready to start selling your photos online?
+    a.ba.b--ocean.bw1.dib.f4.fw6.link.ocean.ph5.pv3 start selling
+
+= render 'footer'

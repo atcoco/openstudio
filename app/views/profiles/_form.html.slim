@@ -1,0 +1,39 @@
+h5 Account Settings
+hr.b--black-10.bt.mb4
+
+= form_with model: @user, url: profile_path(current_user) do |f|
+  .flex-ns.justify-between
+    .mb4.flex-auto.mr2-ns
+      = f.label :first_name, class: 'db mb2 ttc f6'
+      = f.text_field :first_name, class: 'ba br1 b--silver pv2 ph3 w-100'
+      - @user.errors[:first_name].each do |error|
+        .mt2.red = error
+    .mb4.flex-auto.ml2-ns
+      = f.label :last_name, class: 'db mb2 ttc f6'
+      = f.text_field :last_name, class: 'ba br1 b--silver pv2 ph3 w-100'
+  .mb4
+    = f.label :bio, class: 'db mb2 f6'
+    = f.text_area :bio, class: 'ba br1 b--silver pv2 ph2 w-100', rows: 3
+  /.mb4
+    a.bg-instagram.dib.hover-fb5.link.pa3.white[
+      href=(@user.oauth['instagram'].present? ? '#' : user_instagram_omniauth_authorize_path)
+      data-unlink=unlink_social_profiles_path(id: 'instagram')
+    ]
+      i.fa.fa-instagram.mr2
+      = 'unlink ' if @user.oauth['instagram'].present?
+      | instagram
+      
+    - has_facebook = @user.oauth['facebook'].present?
+    a.bg-facebook.dib.hover-fb5.link.ml3.pa3.white[
+      href=(has_facebook ? '#' : user_facebook_omniauth_authorize_path)
+      data-method=(has_facebook ? 'delete' : nil)
+      data-remote=(has_facebook ? unlink_social_profiles_path(id: 'facebook') : nil)
+      data-success=(has_facebook ? '')
+    ]
+      i.fa.fa-facebook.mr2
+      = 'unlink ' if @user.oauth['facebook'].present?
+      | facebook
+      
+  .mb4.mt5.tr
+    a.js-modal-close.bn.bg-white.black-50.hover-black-90.link.mb3.mb0-ns.mr3-ns.ph4-ns.db.di-ns.tc.pv3 href="javascript:;" cancel
+    button.ba.b--black-50.bg-white.black-70.hover-black.ph5-ns.ph6-l.pv3.pointer.db.di-ns.w-100.w-auto-ns save

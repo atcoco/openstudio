@@ -1,0 +1,22 @@
+.bg-light-gray.cover.min-vh-100.ph4.pv3 style="background-image: url(http://farid.co/OS/onboard-bg.jpg)"
+  .brand
+    a.link.f3.pa3.white-90.hover-white href="/"
+      span.fw3 open
+      span.fw6 studios
+
+  .center.mw7-ns.mb4.mt6
+    = render 'shared/flash_messages'
+
+    h1.cardo.f2.fw3.mb5.tc.white Forgot your password?
+
+    = form_with model: resource, local: true, url: password_path(resource_name), class: 'center ma4 w-80', method: 'post' do |f|
+      .mb4
+        = f.email_field :email, class: "ba #{resource.errors[:email].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your email'
+        - resource.errors.full_messages_for(:email).each do |error|
+          .mt2.lime = error
+
+      .mb4.tc
+        input.ba.b--white.bg-transparent.f3.fw4.hover-ocean.hover-bg-white.link.montserrat.pa3.pointer.w-100.white type="submit" value="Send me reset password instructions"
+
+      .flex.justify-between.mb4
+        a.f6.hover-white.link.white-90 href=new_user_registration_path Don't have an account?

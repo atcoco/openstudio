@@ -1,0 +1,29 @@
+.hero {
+  font-size: 1.5em;
+  padding-bottom: 50px;
+  padding-top: 30px;
+  
+  &.-black {
+    color: #fff;
+  }
+
+  &.-inverted {
+    background: #000;
+    color: #fff;
+  }
+
+  &.-with-background {
+    background-size: cover;
+  }
+
+  &.-top {
+    h1 {
+      font-size: 60px;
+      margin-top: 6rem;
+    }
+
+    .cta {
+      margin-top: 50px;
+    }
+  }
+}

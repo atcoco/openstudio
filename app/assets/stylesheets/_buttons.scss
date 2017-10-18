@@ -1,0 +1,33 @@
+.btn.btn-bordered {
+  background: none;
+
+  &.btn-default {
+    color: $btn-primary-color;
+  }
+}
+
+.btn-facebook {
+  background-color: #6678a2;
+  background-image: linear-gradient(to bottom, #6678a2, #5a6c94);
+  background-repeat: repeat-x;
+  border-color: #4b597b;
+  color: #fff;
+
+  &:hover {
+    border-color: lighten(#4b597b, 10%);
+    color: #eee;
+  }
+}
+
+.btn-instagram {
+  background-color: #e4405f;
+  background-image: linear-gradient(to bottom, #e4405f, #b9324c);
+  background-repeat: repeat-x;
+  border-color: #ad0424;
+  color: #fff;
+
+  &:hover {
+    border-color: lighten(#ad0424, 10%);
+    color: #eee;
+  }
+}

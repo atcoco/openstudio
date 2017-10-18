@@ -1,0 +1,12 @@
+doctype html
+html
+  = render 'layouts/html_head'
+
+  body
+    = render 'shared/fb_sdk'
+
+    == yield
+
+    = render 'pages/footer'
+
+    = javascript_pack_tag 'application', async: true

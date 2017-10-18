@@ -1,0 +1,45 @@
+.bg-light-gray.cover.min-vh-100.ph4.pv3 style="background-image: url(http://farid.co/OS/onboard-bg.jpg)"
+  .flex.items-center.justify-center.montserrat.pb4.relative
+    a.absolute.f3.left-0.link.tracked-tight.white href=root_path
+      span.fw3 open
+      span.fw6 studios
+    .relative
+      .b.bg-white.br5.ocean.ph45.pv3.tracked-mega.ttu Step 1
+      .absolute.fw4.mt2.nowrap.o-50.tc.tracked-tight.w-100.white Create Free Account
+    .o-50.relative
+      .b.bg-white.br5.mh4.ocean.ph45.pv3.tracked-mega.ttu Step 2
+      .absolute.fw4.mt2.nowrap.tc.tracked-tight.w-100.white Upload Your Artwork
+    .o-50.relative
+      .b.bg-white.br5.ocean.ph45.pv3.tracked-mega.ttu Step 3
+      .absolute.fw4.mt2.nowrap.tc.tracked-tight.w-100.white Complete Your Profile
+
+  .center.mw6-ns.mv4
+    h1.cardo.f1.mb2.mt0.tc.white Start your free trial.
+    h3.montserrat.mt0.fw3.tc.white No credit card required
+
+    = form_with model: resource, url: onboarding_registrations_path, class: 'center ma4 w-80' do |f|
+      .mb4
+        = f.text_field :first_name, class: "ba #{resource.errors[:first_name].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your artist name (will appear as your url)'
+        - resource.errors[:first_name].each do |error|
+          .mt2.lime = error
+
+      .mb4
+        = f.email_field :email, class: "ba #{resource.errors[:email].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your email'
+        - resource.errors[:email].each do |error|
+          .mt2.lime = error
+
+      .mb4
+        = f.password_field :password, class: "ba #{resource.errors[:password].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Your password'
+        - resource.errors[:password].each do |error|
+          .mt2.lime = error
+
+      .mb4
+        = f.password_field :password_confirmation, class: "ba #{resource.errors[:password_confirmation].any? ? 'b--lime' : 'b--white'} bg-white-20 bw1 mb1 montserrat pa3 p-white w-100 white", placeholder: 'Password confirmation'
+        - resource.errors[:password_confirmation].each do |error|
+          .mt2.lime = error
+
+      .mb4.tc
+        input.ba.b--white.bg-transparent.f3.fw4.hover-dark-gray.montserrat.pa3.pointer.w-100.white type="submit" value="Get Started"
+
+      .mb4.tc
+        a.f6.link.white href=new_user_session_path Already have account?

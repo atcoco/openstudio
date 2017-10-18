@@ -1,0 +1,13 @@
+{
+  "name": "resize-on-demand",
+  "version": "1.0.0",
+  "description": "Resize image on demand",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "dependencies": {
+    "sharp": "^0.18.2"
+  },
+  "devDependencies": {
+    "aws-sdk": "*"
+  }
+}

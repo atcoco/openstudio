@@ -1,0 +1,72 @@
+.pa4
+  .ml3.mb4
+    - if @user
+      .dib.mr3
+        span.foam> Author:
+        = @user.full_name
+
+    a.br4.link.mr2.ph3.pv2.underline-hover.white[
+      class=(params[:show].blank? ? 'bg-ocean disabled' : 'bg-foam')
+      href=admin_photos_path(user: params[:user])
+      ] All
+    a.br4.link.mr2.ph3.pv2.underline-hover.white[
+      class=(params[:show] == 'approved' ? 'bg-ocean disabled' : 'bg-foam')
+      href=admin_photos_path(show: 'approved', user: params[:user])
+      ] Approved
+    a.br4.link.mr2.ph3.pv2.underline-hover.white[
+      class=(params[:show] == 'unapproved' ? 'bg-ocean disabled' : 'bg-foam')
+      href=admin_photos_path(show: 'unapproved', user: params[:user])
+      ] Unapproved
+
+  - @photos.each do |photo|
+    .flex
+      .flex-1.ba.b--transparent.bw4
+        a.db.ba.b--white.bw4.cover.ds.relative.overflow-hidden.shadow-q[
+          href=photo.full_url('preview', max_width: nil)
+          style="background-image:url(#{photo.full_url('preview', max_width: nil)})"
+          target="_blank"
+        ]
+      .flex-1.pv3
+        .b.mb2
+          span.evening> Status:
+          = photo.status
+          - if photo.error.present?
+            .red = photo.error
+          - elsif photo.rejected?
+            .gold = photo.rejection_reason
+        .mb2
+          span.evening> Title:
+          = photo.title
+        .mb2
+          span.evening> Description:
+          = photo.description
+      .flex-1.ml3.pv3
+        .mb2
+          span.evening> User:
+          = link_to photo.user&.full_name, admin_photos_path(user: photo.user), class: 'link ocean underline-hover'
+        .mb2
+          span.evening> Prices:
+          - photo.price_list.each do |px|
+            .ml2
+              = Photo::SIZES[:in][px.last]
+              ' " -
+              => number_to_currency px.first, precision: 0
+        .mb2
+          span.evening> Dimension:
+          = photo.width
+          | x
+          = photo.height
+        .mb2
+          span.evening> Quantity:
+          = photo.quantity
+        .mb2
+          span.evening> Paper:
+          = photo.paper
+      .flex-1.ml2.pv3
+        a.bg-green.db.link.pa2.tc.underline-hover.white href=approve_admin_photo_path(photo) Approve
+        a.bg-gold.db.link.pa2.tc.underline-hover.white href=reject_admin_photo_path(photo, reason: 'technical') Reject by tech
+        a.bg-red.db.link.pa2.tc.underline-hover.white href=reject_admin_photo_path(photo, reason: 'policy') Reject by policy
+
+.pa4
+  = page_entries_info @photos, entry_name: 'photo'
+  = paginate @photos

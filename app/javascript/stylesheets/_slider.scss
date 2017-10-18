@@ -1,0 +1,53 @@
+$label-width: 4rem;
+$thumb-size: 23px;
+$total-height: 35px;
+
+.range-bar {
+  cursor: pointer;
+  height: 2px;
+  position: absolute;
+  top: ($total-height - 2px) / 2;
+  width: 100%;
+}
+
+.range-bar-active {
+  cursor: pointer;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: ($total-height - 2px) / 2;
+}
+
+.range-slider {
+  height: $total-height;
+  position: relative;
+}
+
+.range-thumb {
+  border-radius: 50%;
+  box-shadow: inset 0 1px 6px rgba(0, 0, 0, .2), 0 0 8px rgba(0, 0, 0, .2);
+  cursor: ew-resize;
+  height: $thumb-size;
+  left: ($total-height - $thumb-size) / 2;
+  position: absolute;
+  top: ($total-height - $thumb-size) / 2;
+  width: $thumb-size;
+}
+
+.range-thumb-handle {
+  height: $total-height;
+  position: absolute;
+  margin-left: -1 * $total-height / 2;
+  margin-top: -1 * $total-height / 2;
+  text-align: center;
+  top: $total-height / 2;
+  width: $total-height;
+}
+
+.range-thumb-label {
+  left: calc(50% - #{$label-width / 2});
+  position: absolute;
+  top: -1 * $thumb-size / 2 - 3px;
+  user-select: none;
+  width: $label-width;
+}
